@@ -1,0 +1,49 @@
+  [4;36;1mSQL (0.020447)[0m   [0;1mCREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.008631)[0m   [0mINSERT INTO schema_info (version) VALUES(0)[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.001047)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to Blog (1)
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000218)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to Blog (1)
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000225)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to Blog (1)
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000220)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to Blog (1)
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000251)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to Blog (1)
+  [4;35;1mSQL (0.070853)[0m   [0mCREATE TABLE blogs (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `datetime` datetime NOT NULL, `title` varchar(64) NOT NULL, `text` text NOT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000210)[0m   [0;1mUPDATE schema_info SET version = 1[0m
+  [4;35;1mSQL (0.000203)[0m   [0mSELECT * FROM schema_info[0m
+  [4;36;1mSQL (0.000227)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.001065)[0m   [0mSHOW FIELDS FROM blogs[0m
+  [4;36;1mSQL (0.000249)[0m   [0;1mSHOW KEYS FROM blogs[0m
+  [4;36;1mBlog Columns (0.000946)[0m   [0;1mSHOW FIELDS FROM blogs[0m
+
+
+Processing BlogsController#index (for 127.0.0.1 at 2006-10-23 02:56:03) [GET]
+  Session ID: 1cdd6ade350e53765a2154650d5680fa
+  Parameters: {"action"=>"index", "controller"=>"blogs"}
+  [4;36;1mBlog Columns (0.001384)[0m   [0;1mSHOW FIELDS FROM blogs[0m
+  [4;35;1mSQL (0.000274)[0m   [0mSELECT count(*) AS count_all FROM blogs [0m
+  [4;36;1mBlog Load (0.000196)[0m   [0;1mSELECT * FROM blogs LIMIT 0, 10[0m
+Rendering actionlistlayoutfalse within layouts/blogs
+Rendering blogs/list
+Completed in 0.03128 (31 reqs/sec) | Rendering: 0.00551 (17%) | DB: 0.00185 (5%) | 200 OK [http://localhost/]
+
+
+Processing BlogsController#new (for 127.0.0.1 at 2006-10-23 02:56:06) [GET]
+  Session ID: 1cdd6ade350e53765a2154650d5680fa
+  Parameters: {"action"=>"new", "controller"=>"blogs"}
+  [4;35;1mBlog Columns (0.001656)[0m   [0mSHOW FIELDS FROM blogs[0m
+Rendering  within layouts/blogs
+Rendering blogs/new
+Rendered blogs/_form (0.00537)
+Completed in 0.01519 (65 reqs/sec) | Rendering: 0.00973 (64%) | DB: 0.00166 (10%) | 200 OK [http://localhost/blogs/new]

@@ -13,8 +13,8 @@
 development:
   adapter: mysql
   database: blog_development
-  username: root
-  password:
+  username: developer
+  password: developer
   host: localhost
 
 # Warning: The database defined as 'test' will be erased and
@@ -30,6 +30,6 @@ test:
 production:
   adapter: mysql
   database: blog_production
-  username: root
-  password: 
+  username: developer
+  password: developer
   host: localhost
