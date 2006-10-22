@@ -11,7 +11,7 @@
 # form the root of the application path.
 
 set :application, "blog"
-set :repository, "http://source.kubosch.no/var/svn/#{application}/trunk"
+set :repository, "http://source.kubosch.no/var/svn/trunk/#{application}"
 
 # =============================================================================
 # ROLES
