@@ -119,3 +119,13 @@ task :long_deploy do
   restart
   enable_web
 end
+
+desc "The spinner task is used by :cold_deploy to start the application up"
+task :spinner, :roles => :app do
+send(run_method, "service blog start")
+end
+
+desc "Restart the mongrel server"
+task :restart, :roles => :app do
+send(run_method, "service blog restart")
+end
