@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th></th>
   <% for column in Blog.content_columns %>
     <th><%= column.human_name %></th>
   <% end %>
@@ -9,6 +10,11 @@
   
 <% for blog in @blogs %>
   <tr>
+    <td valign="top">
+<% if blog.images.first %>
+      <a href="<%=url_for :action => :show, :id => blog %>"><img src="<%=url_for :controller => 'image', :action => :show, :id => blog.images.first %>" /></a>
+<% end %>
+    </td>
   <% for column in Blog.content_columns %>
     <td valign="top"><%=h blog.send(column.name) %></td>
   <% end %>
