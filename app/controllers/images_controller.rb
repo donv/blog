@@ -23,6 +23,7 @@ class ImagesController < ApplicationController
 
   def new
     @image = Image.new
+    @image.blog_id = params[:blog_id]
   end
 
   def create

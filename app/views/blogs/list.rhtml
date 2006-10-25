@@ -10,7 +10,7 @@
       <a href="<%=url_for :action => :show, :id => blog %>"><img src="<%=url_for :controller => 'images', :action => :show, :id => blog.images.first %>" width="80" /></a>
 <% end %>
       <%=h blog.text %><br />
-      <%= link_to 'Show', :action => 'show', :id => blog %> | <%= link_to 'Edit', :action => 'edit', :id => blog %><br />
+      <%= link_to 'Show', :action => 'show', :id => blog %> | <%= link_to 'Edit', :action => 'edit', :id => blog %> | <%= link_to 'Add Image', :controller => 'images', :action => 'new', :blog_id => blog.id %><br />
     </div>
 <% end %>
 
