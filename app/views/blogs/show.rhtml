@@ -1,14 +1,22 @@
+    <div id="spotlight">
+      <div class="btitle">
+        <h4><%=h @blog.title %></h4>
+        <h6 align="right"><%=h @blog.datetime.strftime '%Y-%m-%d %H:%M:%S' %></h6>
+      </div>
+<% if @blog.images.first %>
 <table align="left" width="1"><tr><td>
 <% @blog.images.each do |image| %>
     <a href="<%=url_for :controller => 'images', :action => :show, :id => image %>"><img src="<%= url_for :controller => 'images', :action => :show, :id => image %>" width="160" /></a><br clear="all" />
 <% end %>
 </td></tr></table>
+<% end %>
 
 <% for column in Blog.content_columns %>
 <p>
   <b><%= column.human_name %>:</b> <%=h @blog.send(column.name) %>
 </p>
 <% end %>
+    </div>
 
 <%= link_to 'Edit', :action => 'edit', :id => @blog %> |
 <%= link_to 'Back', :action => 'list' %> | 
