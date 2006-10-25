@@ -12,7 +12,7 @@
   <tr>
     <td valign="top">
 <% if blog.images.first %>
-      <a href="<%=url_for :action => :show, :id => blog %>"><img src="<%=url_for :controller => 'images', :action => :show, :id => blog.images.first %>" /></a>
+      <a href="<%=url_for :action => :show, :id => blog %>"><img src="<%=url_for :controller => 'images', :action => :show, :id => blog.images.first %>" width="160" /></a>
 <% end %>
     </td>
   <% for column in Blog.content_columns %>
