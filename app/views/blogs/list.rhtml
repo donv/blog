@@ -15,7 +15,7 @@
       <a href="<%=url_for :action => :show, :id => blog %>"><img src="<%=url_for :controller => 'images', :action => :show, :id => blog.images.first %>" width="80" /></a>
 <% end %>
     </td>
-    <td valign="top"><%=h blog.datetime.iso8601 %></td>
+    <td valign="top"><%=h blog.datetime.strftime '%Y-%m-%d %H:%M:%S' %></td>
     <td valign="top"><%=h blog.title %></td>
     <td valign="top"><%=h blog.text %></td>
     <td valign="top" nowrap="true"><%= link_to 'Show', :action => 'show', :id => blog %>
