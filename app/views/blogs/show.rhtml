@@ -20,4 +20,4 @@
 
 <%= link_to 'Edit', :action => 'edit', :id => @blog %> |
 <%= link_to 'Back', :action => 'list' %> | 
-<%= link_to 'Add Image', :controller => 'images', :action => 'new', :id => @blog %>
+<%= link_to 'Add Image', :controller => 'images', :action => 'new', :blog_id => @blog.id %>
