@@ -32,4 +32,4 @@ production:
   database: blog_production
   username: developer
   password: developer
-  host: localhost
+  host: www.kubosch.no
