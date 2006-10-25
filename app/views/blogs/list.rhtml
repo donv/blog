@@ -10,11 +10,11 @@
 <% for blog in @blogs %>
   <tr>
   <% for column in Blog.content_columns %>
-    <td><%=h blog.send(column.name) %></td>
+    <td valign="top"><%=h blog.send(column.name) %></td>
   <% end %>
-    <td><%= link_to 'Show', :action => 'show', :id => blog %></td>
-    <td><%= link_to 'Edit', :action => 'edit', :id => blog %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => blog }, :confirm => 'Are you sure?', :post => true %></td>
+    <td valign="top"><%= link_to 'Show', :action => 'show', :id => blog %></td>
+    <td valign="top"><%= link_to 'Edit', :action => 'edit', :id => blog %></td>
+    <td valign="top"><%= link_to 'Destroy', { :action => 'destroy', :id => blog }, :confirm => 'Are you sure?', :post => true %></td>
   </tr>
 <% end %>
 </table>
