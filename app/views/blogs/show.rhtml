@@ -11,11 +11,7 @@
 </td></tr></table>
 <% end %>
 
-<% for column in Blog.content_columns %>
-<p>
-  <b><%= column.human_name %>:</b> <%=h @blog.send(column.name) %>
-</p>
-<% end %>
+<p><%=h @blog.text %></p>
     </div>
 
 <%= link_to 'Edit', :action => 'edit', :id => @blog %> |
