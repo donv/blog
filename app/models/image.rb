@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-  belongs_to :blog
+  belongs_to :blog_entry
   
   def picture=(picture_field)
 	if picture_field.length != 0

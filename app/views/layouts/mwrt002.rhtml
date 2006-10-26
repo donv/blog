@@ -63,11 +63,10 @@ function handlePageEvent(event) {
       </div>
       <ul>
 <% @blogs.each {|blog| %>
-        <li><%= link_to h(blog.title), :action => :list, :id => blog %></h4>
+        <li><%= link_to h(blog.title), :controller => 'blogs', :action => :show, :id => blog %></h4>
 <%   } %>
       </ul>
 
-      <br />
       <%= link_to 'New blog', :controller => 'blogs', :action => 'new' %>
 <% if @blog %>
       | <%= link_to l(:new_blog_entry), :controller => 'blog_entries', :action => 'new', :blog_id => @blog.id %>
