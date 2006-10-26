@@ -32,7 +32,7 @@ class ImagesController < ApplicationController
     @image = Image.new(params[:image])
     if @image.save
       flash[:notice] = 'Image was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to :controller => 'blog_entries', :action => 'show', :id => @image.blog_entry
     else
       render :action => 'new'
     end
