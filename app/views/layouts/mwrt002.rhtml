@@ -73,6 +73,7 @@ function handlePageEvent(event) {
 <% end %>
     </div>
 
+<% if @blog %>
     <div class="rblock">
       <div class="btitle">
         <h4><%=l :blog_entries %></h4>
@@ -83,6 +84,7 @@ function handlePageEvent(event) {
 <%   } %>
       </ul>
     </div>
+<% end %>
 </div>
 <div id="footer">
   <div id="footertext">Copyright &copy; 2006 Kubosch Consulting | All Rights Reserved<br />Design By <a href="http://mywebresource.com" title="Design By MyWebResource">MyWebResource</a> | <a href="http://validator.w3.org/check?uri=referer" title="W3C XHTML 1.0 Strict Compliant">W3C XHTML 1.0</a> | <a href="http://jigsaw.w3.org/css-validator/" title="W3C CSS 2.0 Compliant">W3C CSS 2.0</a></div>
