@@ -1,6 +1,6 @@
-<% @page_title = 'Listing blogs' %>
+<% @page_title = @blog.title %>
 
-<% @blogs.each do |blog| %>
+<% @blog_entries.each do |blog| %>
     <div id="spotlight">
       <div class="btitle">
         <h4><%=h blog.title %></h4>
@@ -14,9 +14,5 @@
     </div>
 <% end %>
 
-<%= link_to 'Previous page', { :page => @blog_pages.current.previous } if @blog_pages.current.previous %>
-<%= link_to 'Next page', { :page => @blog_pages.current.next } if @blog_pages.current.next %> 
-
-<br />
-
-<%= link_to 'New blog', :action => 'new' %>
+<%= link_to 'Previous page', { :page => @blog_entry_pages.current.previous } if @blog_entry_pages.current.previous %>
+<%= link_to 'Next page', { :page => @blog_entry_pages.current.next } if @blog_entry_pages.current.next %> 

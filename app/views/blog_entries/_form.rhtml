@@ -1,0 +1,16 @@
+<%= error_messages_for 'blog_entry' %>
+
+<!--[form:blog_entry]-->
+<p><label for="blog_entry_blog_id">Datetime</label><br/>
+<%= text_field 'blog_entry', 'blog_id'  %></p>
+
+<p><label for="blog_entry_datetime">Datetime</label><br/>
+<%= datetime_select 'blog_entry', 'datetime'  %></p>
+
+<p><label for="blog_entry_title">Title</label><br/>
+<%= text_field 'blog_entry', 'title'  %></p>
+
+<p><label for="blog_entry_text">Text</label><br/>
+<%= text_area 'blog_entry', 'text'  %></p>
+<!--[eoform:blog_entry]-->
+

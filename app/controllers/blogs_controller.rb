@@ -1,7 +1,7 @@
 class BlogsController < ApplicationController
   def index
     list
-    render :action => 'list'
+    render :action => 'list', :id => Blog.find(:first)
   end
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
@@ -9,11 +9,17 @@ class BlogsController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @blog_pages, @blogs = paginate :blogs, :per_page => 10, :order => 'datetime DESC'
+    if params[:id]
+      @blog = Blog.find(params[:id])
+    else
+      @blog = Blog.find(:first)
+    end
+    @blog_entry_pages, @blog_entries = paginate :blog_entries, :per_page => 10, :conditions => "blog_id = #{@blog.id}", :order => 'datetime DESC'
   end
 
   def show
-    @blog = Blog.find(params[:id])
+    @blog_entry = BlogEntry.find(params[:id])
+    @blog = @blog_entry.blog
   end
 
   def new

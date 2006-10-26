@@ -48,22 +48,41 @@ function handlePageEvent(event) {
     </div>
     <div id="header">
       <div id="introtext">
-        <h1><%=l :blog %></h1>
-        <h3><%=@page_title ? @page_title : '' %></h3>
+        <h1><%=@page_title ? @page_title : l(:blog) %></h1>
+        <h3><%=@page_subtitle ? @page_subtitle : '' %></h3>
       </div>
     </div>
-    <div id="spotlight">
-      <%= yield  %>
-    </div>
+
+    <%= yield  %>
+
   </div>
   <div id="rightcol">
     <div class="rblock">
       <div class="btitle">
         <h4><%=l :blogs %></h4>
       </div>
+      <ul>
 <% @blogs.each {|blog| %>
+        <li><%= link_to h(blog.title), :action => :list, :id => blog %></h4>
+<%   } %>
+      </ul>
+
+      <br />
+      <%= link_to 'New blog', :controller => 'blogs', :action => 'new' %>
+<% if @blog %>
+      | <%= link_to l(:new_blog_entry), :controller => 'blog_entries', :action => 'new', :blog_id => @blog.id %>
+<% end %>
+    </div>
+
+    <div class="rblock">
+      <div class="btitle">
+        <h4><%=l :blog_entries %></h4>
+      </div>
+      <ul>
+<% @blog.blog_entries.each {|blog| %>
         <li><%= link_to h(blog.title), :action => :show, :id => blog %></h4>
 <%   } %>
+      </ul>
     </div>
 </div>
 <div id="footer">
