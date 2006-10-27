@@ -23,8 +23,8 @@ development:
 test:
   adapter: mysql
   database: blog_test
-  username: root
-  password:
+  username: developer
+  password: developer
   host: localhost
 
 production:

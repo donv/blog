@@ -16,16 +16,7 @@ class BlogsControllerTest < Test::Unit::TestCase
   def test_index
     get :index
     assert_response :success
-    assert_template 'list'
-  end
-
-  def test_list
-    get :list
-
-    assert_response :success
-    assert_template 'list'
-
-    assert_not_nil assigns(:blogs)
+    assert_template 'show'
   end
 
   def test_show

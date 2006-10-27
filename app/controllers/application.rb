@@ -1,4 +1,5 @@
 require 'localization'
+require 'redcloth'
 
 class ApplicationController < ActionController::Base
   include Localization

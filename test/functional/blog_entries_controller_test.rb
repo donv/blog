@@ -50,10 +50,10 @@ class BlogEntriesControllerTest < Test::Unit::TestCase
   def test_create
     num_blog_entries = BlogEntry.count
 
-    post :create, :blog_entry => {}
+    post :create, :blog_entry => {:id => 1, :datetime => DateTime.now, :title => 'hello', :text => 'content'}
 
     assert_response :redirect
-    assert_redirected_to :action => 'list'
+    assert_redirected_to :action => 'show'
 
     assert_equal num_blog_entries + 1, BlogEntry.count
   end

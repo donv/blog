@@ -32,14 +32,14 @@ class ImagesControllerTest < Test::Unit::TestCase
     get :show, :id => 1
 
     assert_response :success
-    assert_template 'show'
+    assert_template nil
 
     assert_not_nil assigns(:image)
     assert assigns(:image).valid?
   end
 
   def test_new
-    get :new
+    get :new, :blog_entry_id => 1
 
     assert_response :success
     assert_template 'new'
@@ -53,7 +53,7 @@ class ImagesControllerTest < Test::Unit::TestCase
     post :create, :image => {}
 
     assert_response :redirect
-    assert_redirected_to :action => 'list'
+    assert_redirected_to :action => 'show'
 
     assert_equal num_images + 1, Image.count
   end

@@ -1,5 +1,8 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 first:
   id: 1
+  datetime: 2006-10-01
 another:
   id: 2
+  datetime: 2006-10-01
+  

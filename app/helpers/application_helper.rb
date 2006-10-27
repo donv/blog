@@ -1,4 +1,10 @@
-# Methods added to this helper will be available to all templates in the application.
+require 'redcloth'
+
 module ApplicationHelper
   include Localization
+  
+  def r(textile)
+    RedCloth.new(textile).to_html
+  end
+  
 end

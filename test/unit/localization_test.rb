@@ -28,7 +28,7 @@ class LocalizationTest < Test::Unit::TestCase
   end
 
   def test_arguments_as_array
-    assert_match /an argument/, l([:registration_email_sent, 'an argument'])
+    assert_match(/an argument/, l([:registration_email_sent, 'an argument']))
   end
 
   def test_arguments_empty_array
