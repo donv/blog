@@ -7,7 +7,7 @@
         <h4><%=h blog_entry.title %></h4>
       </div>
 <% if blog_entry.images.first %>
-      <a href="<%=url_for :controller => 'blog_entries', :action => :show, :id => blog_entry %>"><img src="<%=url_for :controller => 'images', :action => :show, :id => blog_entry.images.first %>" width="80" /></a>
+      <a href="<%=url_for :controller => 'blog_entries', :action => :show, :id => blog_entry %>"><img src="<%=url_for :controller => 'images', :action => :thumbnail, :id => blog_entry.images.first %>" width="80" /></a>
 <% end %>
       <%=r blog_entry.text %><br />
       <br clear="all" />

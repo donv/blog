@@ -1,3 +1,5 @@
+require 'RMagick'
+
 class ImagesController < ApplicationController
   def index
     list
@@ -13,12 +15,28 @@ class ImagesController < ApplicationController
   end
 
   def show
-    @image = Image.find(params[:id])
+    image = Image.find(params[:id]).picture_data
     @headers['Expires'] = 1.year.from_now.httpdate
-    send_data(@image.picture_data,
-#              :filename     => @image.title,
-              :filename     => "Blog Image #{@image.id}",
-              :type         => @image.picture_content_type,
+    send_data(image,
+#              :filename     => image.title,
+              :filename     => "Blog Image #{image.id}",
+              :type         => image.picture_content_type,
+              :disposition  => "inline")
+  end
+
+  def thumbnail
+    image = Image.find(params[:id])
+    image_data = image.picture_data
+    puts image_data.length
+    original_image = Magick::Image.from_blob(image_data)[0]
+    puts original_image.columns
+    scale = 160.0 / original_image.columns
+    thumbnail_image = original_image.thumbnail(scale)
+    @headers['Expires'] = 1.year.from_now.httpdate
+    send_data(thumbnail_image.to_blob,
+#              :filename     => image.title,
+              :filename     => "Blog Image #{image.id}",
+              :type         => image.picture_content_type,
               :disposition  => "inline")
   end
 
