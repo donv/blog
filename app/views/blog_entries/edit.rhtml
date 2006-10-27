@@ -1,4 +1,4 @@
-<h1>Editing blog_entry</h1>
+<% @page_title = "Editing #{l :blog_entry}" %>
 
 <%= start_form_tag :action => 'update', :id => @blog_entry %>
   <%= render :partial => 'form' %>
