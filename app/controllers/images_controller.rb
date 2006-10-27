@@ -15,9 +15,9 @@ class ImagesController < ApplicationController
   end
 
   def show
-    image = Image.find(params[:id]).picture_data
+    image = Image.find(params[:id])
     @headers['Expires'] = 1.year.from_now.httpdate
-    send_data(image,
+    send_data(image.picture_data,
 #              :filename     => image.title,
               :filename     => "Blog Image #{image.id}",
               :type         => image.picture_content_type,

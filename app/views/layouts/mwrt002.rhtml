@@ -67,9 +67,9 @@ function handlePageEvent(event) {
 <%   } %>
       </ul>
 
-      <%= link_to 'New blog', :controller => 'blogs', :action => 'new' %>
+      <%= link_to "#{l :new} #{l :blog}", :controller => 'blogs', :action => 'new' %>
 <% if @blog %>
-      | <%= link_to l(:new_blog_entry), :controller => 'blog_entries', :action => 'new', :blog_id => @blog.id %>
+      | <%= link_to "#{l :new} #{l :blog_entry}", :controller => 'blog_entries', :action => 'new', :blog_id => @blog.id %>
 <% end %>
     </div>
 
