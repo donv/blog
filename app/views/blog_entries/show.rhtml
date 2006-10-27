@@ -2,7 +2,7 @@
 
     <div id="spotlight">
       <div class="btitle">
-        <h6 style="float: right"><%=h @blog_entry.datetime.strftime('%Y-%m-%d %H:%M:%S') %></h6>
+        <h6 style="float: right"><%=h @blog_entry.datetime.strftime('%Y-%m-%d %H:%M') %></h6>
         <h4><%=h @blog_entry.title %></h4>
       </div>
 <% @blog_entry.images.each do |image| %>

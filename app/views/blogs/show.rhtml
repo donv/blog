@@ -3,7 +3,7 @@
 <% @blog_entries.each do |blog_entry| %>
     <div id="spotlight">
       <div class="btitle">
-        <h6 style="float: right"><%=h blog_entry.datetime.strftime('%Y-%m-%d %H:%M:%S') %></h6>
+        <h6 style="float: right"><%=h blog_entry.datetime.strftime('%Y-%m-%d %H:%M') %></h6>
         <h4><%=h blog_entry.title %></h4>
       </div>
 <% if blog_entry.images.first %>
