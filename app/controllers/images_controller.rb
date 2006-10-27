@@ -27,9 +27,7 @@ class ImagesController < ApplicationController
   def thumbnail
     image = Image.find(params[:id])
     image_data = image.picture_data
-    puts image_data.length
     original_image = Magick::Image.from_blob(image_data)[0]
-    puts original_image.columns
     scale = 160.0 / original_image.columns
     thumbnail_image = original_image.thumbnail(scale)
     @headers['Expires'] = 1.year.from_now.httpdate
