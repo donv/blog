@@ -24,27 +24,19 @@
   <link rel="alternate" type="application/rss+xml" title="News" href="news.xml" />
   <link rel="alternate" type="application/rss+xml" title="Articles" href="articles.xml" />
   <link rel="alternate" type="application/rss+xml" title="Downloads" href="downloads.xml" />-->
-  <script type="text/javascript">
-function handlePageEvent(event) {
-  if (event.altKey && event.shiftKey && event.charCode == 78) {
-    window.location = '<%=url_for(:controller => 'backlogs', :action => :new)%>';
-  } else if (event.altKey && event.charCode == 110) {
-    window.location = '<%=url_for(:controller => 'tasks', :action => :new, :backlog => (@backlog ? @backlog.id : nil) ) %>';
-  } else {
-//    alert("shift: " + event.shiftKey + ", alt: " + event.altKey + ", ctrl: " + event.ctrlKey + ", " + event.charCode + ", " + event.keyCode);
-  }
-}
-  </script>
 </head>
 
 <body onkeypress="handlePageEvent(event)">
 <div id="wrap">
   <div id="leftcol">
     <div id="navbar">
-      <a href="#" title="Log in">Log in</a>
-      | <a href="#" title="Log out">Log out</a>
+<% if @session['user'] %>
+      <%=link_to l(:user_welcome_logout_link), :controller => 'user', :action => :logout %>
       | <a href="#" title="Administration">Administration</a>
       | <a href="#" title="Profile">Profile</a>
+<% else %>
+      <%=link_to l(:user_logout_login_link), :controller => 'user', :action => :login %>
+<% end %>
     </div>
     <div id="header">
       <div id="introtext">

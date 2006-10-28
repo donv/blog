@@ -54,3 +54,4 @@ end
 require 'environments/localization_environment'
 require 'localization'
 Localization::load_localized_strings
+require 'environments/user_environment'

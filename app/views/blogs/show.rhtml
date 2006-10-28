@@ -13,10 +13,12 @@
       <br clear="all" />
       <div align="right">
 <% if blog_entry.images.size > 1 %>
-        <%= link_to 'More Images', :controller => 'blog_entries', :action => 'show', :id => blog_entry %> |
+        <%= link_to 'More Images', :controller => 'blog_entries', :action => 'show', :id => blog_entry %>
 <% end %>
-        <%= link_to 'Edit', :controller => 'blog_entries', :action => 'edit', :id => blog_entry %> |
-        <%= link_to 'Add Image', :controller => 'images', :action => 'new', :blog_entry_id => blog_entry.id %><br />
+<% if @session['user'] %>
+        | <%= link_to 'Edit', :controller => 'blog_entries', :action => 'edit', :id => blog_entry %>
+        | <%= link_to 'Add Image', :controller => 'images', :action => 'new', :blog_entry_id => blog_entry.id %><br />
+<% end %>
       </div>
     </div>
 <% end %>
