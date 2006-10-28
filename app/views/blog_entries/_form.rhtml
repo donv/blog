@@ -2,7 +2,7 @@
 
 <!--[form:blog_entry]-->
 <p><label for="blog_entry_blog_id">Blog</label><br/>
-<%= text_field 'blog_entry', 'blog_id'  %></p>
+<%= select("blog_entry", "blog_id", Blog.find_all.collect {|b| [ b.title, b.id ] }, { :include_blank => true }) %>
 
 <p><label for="blog_entry_datetime">Datetime</label><br/>
 <%= datetime_select 'blog_entry', 'datetime'  %></p>

@@ -3,6 +3,8 @@ blog: Blog
 blogs: Blogs
 blog_entry: Blog Entry
 blog_entries: Blog Entries
+editing: Editing
+image: Image
 list: List
 new: New
 save: Save

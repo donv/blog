@@ -2,7 +2,7 @@
 
 <!--[form:image]-->
 <p><label for="image_blog_id">Blog Entry</label><br/>
-      <%= text_field 'image', 'blog_entry_id' %><br/>
+      <%= select("image", "blog_entry_id", BlogEntry.find_all.collect {|b| [ b.title, b.id ] }, { :include_blank => true }) %>
 </p>
 
 <p><label for="image_picture_data">Picture data</label><br/>
