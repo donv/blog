@@ -2,7 +2,6 @@
 
 <%= start_form_tag :action => 'update', :id => @blog_entry %>
   <%= render :partial => 'form' %>
-  <%= submit_tag 'Edit' %>
+  <%= submit_tag l :save %> |
+  <%= link_to 'back', :action => 'show', :id => @blog_entry %>
 <%= end_form_tag %>
-
-<%= link_to 'back', :action => 'show', :id => @blog_entry %> |

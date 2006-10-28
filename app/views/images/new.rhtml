@@ -2,7 +2,7 @@
 
 <%= start_form_tag({:action => 'create'}, :multipart => true) %>
   <%= render :partial => 'form' %>
-  <%= submit_tag "Create" %>
+  <%= submit_tag "Create" %> |
+  <%= link_to l(:list), :action => 'list' %> |
+  <%= link_to l(:back), :controller => 'blog_entries', :action => 'show', :id => @image.blog_entry_id %>
 <%= end_form_tag %>
-
-<%= link_to 'Back', :action => 'list' %>
