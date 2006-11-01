@@ -4,7 +4,7 @@ class UserController < ApplicationController
   def login
     return if generate_blank
     @user = User.new(@params['user'])
-    if @session['user'] = User.authenticate(@params['user']['login'], @params['user']['password'])
+    if @session['user'] = User.authenticate(@params['user']['email'], @params['user']['password'])
       flash['notice'] = l(:user_login_succeeded)
       redirect_back_or_default :controller => 'blogs', :action => 'index'
     else

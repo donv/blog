@@ -32,8 +32,8 @@
     <div id="navbar">
 <% if @session['user'] %>
       <%=link_to l(:user_welcome_logout_link), :controller => 'user', :action => :logout %>
+      <%=link_to l(:user_profile), :controller => 'user', :action => :edit, :id => @session['user'] %>
       | <a href="#" title="Administration">Administration</a>
-      | <a href="#" title="Profile">Profile</a>
 <% else %>
       <%=link_to l(:user_logout_login_link), :controller => 'user', :action => :login %>
 <% end %>

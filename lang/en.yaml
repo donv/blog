@@ -9,6 +9,7 @@ images: Images
 list: List
 listing: Listing
 new: New
+user_profile: Profile
 save: Save
 
 active_record_errors_inclusion: Inclusion error

@@ -2,6 +2,13 @@ require 'digest/sha1'
 
 # this model expects a certain database layout and its based on the name/login pattern. 
 class User < ActiveRecord::Base
+  validates_presence_of :email, :on => :create
+  validates_uniqueness_of :email, :on => :create
+
+  validates_presence_of :password, :if => :validate_password?
+  validates_confirmation_of :password, :if => :validate_password?
+  validates_length_of :password, { :minimum => 0, :if => :validate_password? }
+  validates_length_of :password, { :maximum => 40, :if => :validate_password? }
 
   attr_accessor :new_password
   
@@ -10,10 +17,10 @@ class User < ActiveRecord::Base
     @new_password = false
   end
 
-  def self.authenticate(login, pass)
-    u = find_first(["login = ? AND verified = 1 AND deleted = 0", login])
+  def self.authenticate(email, pass)
+    u = find_first(["email = ? AND verified = 1 AND deleted = 0", email])
     return nil if u.nil?
-    find_first(["login = ? AND salted_password = ? AND verified = 1", login, salted_password(u.salt, hashed(pass))])
+    find_first(["email = ? AND salted_password = ? AND verified = 1", email, salted_password(u.salt, hashed(pass))])
   end
 
   def self.authenticate_by_token(id, token)
@@ -101,14 +108,5 @@ class User < ActiveRecord::Base
     hashed(salt + hashed_password)
   end
 
-  validates_presence_of :login, :on => :create
-  validates_length_of :login, :within => 3..40, :on => :create
-  validates_uniqueness_of :login, :on => :create
-  validates_uniqueness_of :email, :on => :create
-
-  validates_presence_of :password, :if => :validate_password?
-  validates_confirmation_of :password, :if => :validate_password?
-  validates_length_of :password, { :minimum => 5, :if => :validate_password? }
-  validates_length_of :password, { :maximum => 40, :if => :validate_password? }
 end
 
