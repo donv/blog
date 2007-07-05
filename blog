@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# blog      Startup script for the blog application
+#
+# chkconfig: 345 89 11
+# description: Kubosch Blog
+
+# See how we were called.
+case "$1" in
+  start)
+        mongrel_rails start -p 3002 -e production -c /u/apps/blog/current -d 1>/u/apps/shared/log/stdout.log 2>/u/apps/shared/log/stderr.log
+        ;;
+  stop)
+        mongrel_rails stop -c /u/apps/blog/current
+        ;;
+  restart)
+        mongrel_rails restart -c /u/apps/blog/current
+        ;;
+  status)
+        ps -ef | grep blog
+        ;;
+  *)
+        echo $"Usage: $prog {start|stop|restart|status}"
+        exit 1
+esac
+
+exit 0
