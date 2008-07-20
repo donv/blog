@@ -4,6 +4,9 @@
 #
 # chkconfig: 345 89 11
 # description: Kubosch Blog application
+# pidfile: /u/apps/$APP/shared/log/mongrel.pid
+
+. /etc/rc.d/init.d/functions
 
 APP=blog
 RUN_AS_USER=donv
@@ -12,6 +15,8 @@ pidfile=${PIDFILE-/u/apps/$APP/shared/log/mongrel.pid}
 APP_DIR="/u/apps/$APP/current"
 LOG_DIR="/u/apps/$APP/shared/log"
 
+USER=`whoami`
+
 # See how we were called.
 case "$1" in
   start)
@@ -19,13 +24,13 @@ case "$1" in
 		then
 			rm -f $pidfile
 		fi
-        su - $user -c "mongrel_rails start -p $PORT -e production -c $APP_DIR -d 1>$LOG_DIR/stdout.log 2>$LOG_DIR/stderr.log"
+        su - $RUN_AS_USER -c "mongrel_rails start -p $PORT -e production -c $APP_DIR -d 1>$LOG_DIR/stdout.log 2>$LOG_DIR/stderr.log"
         ;;
   stop)
-        su - $user -c "mongrel_rails stop -c $APP_DIR"
+        su - $RUN_AS_USER -c "mongrel_rails stop -c $APP_DIR"
         ;;
   restart)
-        su - $user -c "mongrel_rails restart -c $APP_DIR"
+        su - $RUN_AS_USER -c "mongrel_rails restart -c $APP_DIR"
         ;;
   status)
         ps -ef | grep $APP
