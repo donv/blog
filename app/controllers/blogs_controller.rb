@@ -14,7 +14,7 @@ class BlogsController < ApplicationController
     else
       @blog = Blog.find(:first)
     end
-    @blog_entry_pages, @blog_entries = paginate :blog_entries, :per_page => 10, :select => 'datetime, text, title', :conditions => "blog_id = #{@blog.id}", :order => 'datetime DESC'
+    @blog_entry_pages, @blog_entries = paginate :blog_entries, :per_page => 10, :select => 'datetime, id, text, title', :conditions => "blog_id = #{@blog.id}", :order => 'datetime DESC'
   end
 
   def new

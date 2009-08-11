@@ -6,8 +6,8 @@
         <h6 style="float: right"><%=h blog_entry.datetime.strftime('%Y-%m-%d %H:%M') %></h6>
         <h4><%=h blog_entry.title %></h4>
       </div>
-<% if blog_entry.images.first %>
-      <a href="<%=url_for :controller => 'blog_entries', :action => :show, :id => blog_entry %>"><img src="<%=url_for :controller => 'images', :action => :thumbnail, :id => blog_entry.images.first %>" width="80" /></a>
+<% if image = Image.find_by_blog_entry_id(blog_entry.id, :select => :id) %>
+      <a href="<%=url_for :controller => 'blog_entries', :action => :show, :id => blog_entry %>"><img src="<%=url_for :controller => 'images', :action => :thumbnail, :id => image.id %>" width="80" /></a>
 <% end %>
       <%=r blog_entry.text %><br />
       <br clear="all" />
