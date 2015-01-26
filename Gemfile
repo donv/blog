@@ -28,10 +28,12 @@ gem 'will_paginate'
 
 group :development do
   gem 'capistrano-rails'
+  gem 'capistrano-rvm'
 end
 
 group :development, :test do
-  gem 'byebug'
+  gem 'binding_of_caller', '0.7.3.pre1'
+  gem 'byebug', platform: :ruby
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
