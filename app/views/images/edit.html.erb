@@ -1,0 +1,9 @@
+<% @page_title = "#{t :editing} #{t :image}" %>
+
+<%= form_tag({action: :update, id: @image}, multipart: true) do %>
+    <%= render 'form' %>
+    <%= submit_tag t :save %> |
+    <%= link_to t(:list), action: 'list' %> |
+    <%= link_to 'Show', action: :show, id: @image %> |
+    <%= link_to 'Back', controller: :blog_entries, action: :show, id: @image.blog_entry_id %>
+<% end %>

@@ -1,0 +1,26 @@
+<% @page_title = @blog.title %>
+
+<% @blog_entries.each do |blog_entry| %>
+    <div id="spotlight">
+      <div class="btitle">
+        <h6 style="float: right"><%=h blog_entry.datetime.strftime('%Y-%m-%d %H:%M') %></h6>
+        <h4><%=h blog_entry.title %></h4>
+      </div>
+<% if image = Image.select(:id).find_by_blog_entry_id(blog_entry.id) %>
+      <a href="<%=url_for :controller => 'blog_entries', :action => :show, :id => blog_entry %>"><img src="<%=url_for :controller => 'images', :action => :thumbnail, :id => image.id %>" width="80" /></a>
+<% end %>
+      <%=r blog_entry.text %><br />
+      <br clear="all" />
+      <div align="right">
+<% if blog_entry.images.size > 1 %>
+        <%= link_to 'More Images', :controller => 'blog_entries', :action => 'show', :id => blog_entry %>
+<% end %>
+<% if session['user'] %>
+        | <%= link_to 'Edit', :controller => 'blog_entries', :action => 'edit', :id => blog_entry %>
+        | <%= link_to 'Add Image', :controller => 'images', :action => 'new', :blog_entry_id => blog_entry.id %><br />
+<% end %>
+      </div>
+    </div>
+<% end %>
+
+<%=will_paginate @blog_entries%>

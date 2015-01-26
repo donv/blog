@@ -1,8 +1,0 @@
-<% @page_title = "#{l :new} #{l :image}" %>
-
-<%= start_form_tag({:action => 'create'}, :multipart => true) %>
-  <%= render :partial => 'form' %>
-  <%= submit_tag "Create" %> |
-  <%= link_to l(:list), :action => 'list' %> |
-  <%= link_to l(:back), :controller => 'blog_entries', :action => 'show', :id => @image.blog_entry_id %>
-<%= end_form_tag %>

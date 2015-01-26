@@ -1,30 +1,34 @@
-#require 'user_notify'
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../../config/environment', __FILE__)
+require 'rails/test_help'
 
-ENV["RAILS_ENV"] = "test"
-require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
-require 'test_help'
+MiniTest::Reporters.use!
 
-class Test::Unit::TestCase
-  # Transactional fixtures accelerate your tests by wrapping each test method
-  # in a transaction that's rolled back on completion.  This ensures that the
-  # test database remains unchanged so your fixtures don't have to be reloaded
-  # between every test method.  Fewer database queries means faster tests.
-  #
-  # Read Mike Clark's excellent walkthrough at
-  #   http://clarkware.com/cgi/blosxom/2005/10/24#Rails10FastTesting
-  #
-  # Every Active Record database supports transactions except MyISAM tables
-  # in MySQL.  Turn off transactional fixtures in this case; however, if you
-  # don't care one way or the other, switching from MyISAM to InnoDB tables
-  # is recommended.
-  self.use_transactional_fixtures = true
+class ActiveSupport::TestCase
+  fixtures :all
 
-  # Instantiated fixtures are slow, but give you @david where otherwise you
-  # would need people(:david).  If you don't want to migrate your existing
-  # test cases which use the @david style and don't mind the speed hit (each
-  # instantiated fixtures translates to a database query per test method),
-  # then set this back to true.
-  self.use_instantiated_fixtures  = false
+  def login
+    session[:user] = users(:bob)
+  end
 
-  # Add more helper methods to be used by all tests here...
+  def assert_no_errors(assigns_sym)
+    assert_not_nil assigns(assigns_sym)
+    assert_equal [], assigns(assigns_sym).errors.to_a
+  end
+
+end
+
+class Mail::TestMailer
+  cattr_accessor :inject_one_error
+  self.inject_one_error = false
+
+  # FIXME(uwe):  Use deliver_now instead?
+  def deliver_with_error!(mail)
+    if inject_one_error
+      self.class.inject_one_error = false
+      raise 'Failed to send email' if ActionMailer::Base.raise_delivery_errors
+    end
+    deliver_without_error! mail
+  end
+  alias_method_chain :deliver!, :error
 end

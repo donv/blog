@@ -1,0 +1,7 @@
+<% @page_title = "#{t :new} #{t :blog_entry}" %>
+
+<%= form_tag action: :create do %>
+    <%= render 'form' %>
+    <%= submit_tag "Create" %> |
+    <%= link_to 'Back', controller: :blogs, action: :show, id: @blog %>
+<% end %>

@@ -1,27 +1,21 @@
-require 'RMagick'
-
 class ImagesController < ApplicationController
   def index
     list
-    render :action => 'list'
+    render action: :list
   end
 
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
-
   def list
-    @image_pages, @images = paginate :images, :per_page => 10
+    @images = Image.paginate(per_page: 10, page: params[:page])
   end
 
   def show
     image = Image.find(params[:id])
-    @headers['Expires'] = 1.year.from_now.httpdate
+    headers['Expires'] = 1.year.from_now.httpdate
     send_data(image.picture_data,
-#              :filename     => image.title,
-              :filename     => "Blog Image #{image.id}",
-              :type         => image.picture_content_type,
-              :disposition  => "inline")
+        # :filename     => image.title,
+        filename: "Blog Image #{image.id}",
+        type: image.picture_content_type,
+        disposition: 'inline')
   end
 
   def thumbnail
@@ -30,12 +24,12 @@ class ImagesController < ApplicationController
     original_image = Magick::Image.from_blob(image_data)[0]
     scale = 160.0 / original_image.columns
     thumbnail_image = original_image.thumbnail(scale)
-    @headers['Expires'] = 1.year.from_now.httpdate
+    headers['Expires'] = 1.year.from_now.httpdate
     send_data(thumbnail_image.to_blob,
 #              :filename     => image.title,
-              :filename     => "Blog Image #{image.id}",
-              :type         => image.picture_content_type,
-              :disposition  => "inline")
+        filename: "Blog Image #{image.id}",
+        type: image.picture_content_type,
+        disposition: 'inline')
   end
 
   def new
@@ -45,12 +39,12 @@ class ImagesController < ApplicationController
   end
 
   def create
-    @image = Image.new(params[:image])
+    @image = Image.new(image_params)
     if @image.save
       flash[:notice] = 'Image was successfully created.'
-      redirect_to :controller => 'blog_entries', :action => 'show', :id => @image.blog_entry
+      redirect_to controller: :blog_entries, action: :show, id: @image.blog_entry
     else
-      render :action => 'new'
+      render action: :new
     end
   end
 
@@ -60,16 +54,22 @@ class ImagesController < ApplicationController
 
   def update
     @image = Image.find(params[:id])
-    if @image.update_attributes(params[:image])
+    if @image.update_attributes(image_params)
       flash[:notice] = 'Image was successfully updated.'
-      redirect_to :action => 'show', :id => @image
+      redirect_to action: :show, id: @image
     else
-      render :action => 'edit'
+      render action: :edit
     end
   end
 
   def destroy
     Image.find(params[:id]).destroy
     redirect_to :action => 'list'
+  end
+
+  private
+
+  def image_params
+    params.require(:image).permit(:blog_entry_id)
   end
 end

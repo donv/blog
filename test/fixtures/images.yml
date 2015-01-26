@@ -1,7 +1,6 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 first:
-  id: 1
+  blog_entry: first
   picture_data: 1,2,3,4
   picture_content_type: image/png
 another:
-  id: 2
+  blog_entry: first

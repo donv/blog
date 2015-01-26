@@ -1,0 +1,8 @@
+<% @page_title = "Editing #{t :blog_entry}" %>
+<% @page_subtitle = @blog_entry.title %>
+
+<%= form_tag action: :update, id: @blog_entry do %>
+    <%= render 'form' %>
+    <%= submit_tag t :save %> |
+    <%= link_to t(:back), action: :show, id: @blog_entry %>
+<% end %>

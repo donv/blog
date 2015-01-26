@@ -1,7 +1,0 @@
-<% @page_title = "#{l :new} #{l :blog_entry}" %>
-
-<%= start_form_tag :action => 'create' %>
-  <%= render :partial => 'form' %>
-  <%= submit_tag "Create" %> |
-  <%= link_to 'Back', :controller => 'blogs', :action => 'show', :id => @blog %>
-<%= end_form_tag %>

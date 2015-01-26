@@ -1,8 +1,10 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 first:
-  id: 1
+  blog: first
+  title: Title 1
   datetime: 2006-10-01
+  text: Text 1
 another:
-  id: 2
+  blog: first
+  title: Title 2
   datetime: 2006-10-01
-  
+  text: Text 2

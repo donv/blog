@@ -1,20 +1,18 @@
 class BlogsController < ApplicationController
   def index
     show
-    render :action => 'show'
+    render action: 'show'
   end
-
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
 
   def show
     if params[:id]
       @blog = Blog.find(params[:id])
     else
-      @blog = Blog.find(:first)
+      @blog = Blog.first
     end
-    @blog_entry_pages, @blog_entries = paginate :blog_entries, :per_page => 10, :select => 'datetime, id, text, title', :conditions => "blog_id = #{@blog.id}", :order => 'datetime DESC'
+    @blog_entries = BlogEntry.select(:datetime, :id, :text, :title).
+        where('blog_id = ?', @blog.id).order('datetime DESC').
+        paginate(per_page: 10, page: params[:page])
   end
 
   def new
@@ -22,12 +20,12 @@ class BlogsController < ApplicationController
   end
 
   def create
-    @blog = Blog.new(params[:blog])
+    @blog = Blog.new(blog_params)
     if @blog.save
       flash[:notice] = 'Blog was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to action: :list
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
@@ -37,7 +35,7 @@ class BlogsController < ApplicationController
 
   def update
     @blog = Blog.find(params[:id])
-    if @blog.update_attributes(params[:blog])
+    if @blog.update_attributes(blog_params)
       flash[:notice] = 'Blog was successfully updated.'
       redirect_to :action => 'show', :id => @blog
     else
@@ -48,5 +46,11 @@ class BlogsController < ApplicationController
   def destroy
     Blog.find(params[:id]).destroy
     redirect_to :action => 'list'
+  end
+
+  private
+
+  def blog_params
+    params.require(:blog).permit(:title)
   end
 end
