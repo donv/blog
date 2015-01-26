@@ -3,7 +3,8 @@ source 'https://rubygems.org'
 gem 'rails', '~>4.2.0'
 
 platform :jruby do
-  gem 'activerecord-jdbcpostgresql-adapter'
+  gem 'activerecord-jdbcpostgresql-adapter', groups: [:development, :test]
+  gem 'activerecord-jdbcmysql-adapter', group: :production
   gem 'rmagick4j'
   gem 'therubyrhino'
 end
