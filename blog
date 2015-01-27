@@ -4,15 +4,12 @@
 #
 # chkconfig: 345 89 11
 # description: Kubosch Blog application
-# pidfile: /u/apps/$APP/shared/pids/server.pid
-
-. /etc/rc.d/init.d/functions
 
 APP=blog
 PORT=3002
 RAILS_ENV=production
 RUN_AS_USER=capistrano
-PIDFILE=/u/apps/$APP/shared/pids/server.pid
+PIDFILE=/u/apps/$APP/shared/tmp/pids/server.pid
 APP_DIR="/u/apps/$APP/current"
 LOG_DIR="/u/apps/$APP/shared/log"
 
