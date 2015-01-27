@@ -1,6 +1,3 @@
-require 'user_system'
-require 'redcloth'
-
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include UserSystem

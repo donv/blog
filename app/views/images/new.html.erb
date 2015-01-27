@@ -3,6 +3,6 @@
 <%= form_tag({action: 'create'}, multipart: true) do %>
     <%= render 'form' %>
     <%= submit_tag "Create" %> |
-    <%= link_to t(:list), action: :list %> |
+    <%= link_to t(:list), action: :index %> |
     <%= link_to t(:back), controller: :blog_entries, action: :show, id: @image.blog_entry_id %>
 <% end %>

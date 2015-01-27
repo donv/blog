@@ -1,10 +1,5 @@
 class BlogEntriesController < ApplicationController
   def index
-    list
-    render action: :list
-  end
-
-  def list
     @blog_entries = BlogEntry.paginate(per_page: 10, page: params[:page])
   end
 
@@ -46,7 +41,7 @@ class BlogEntriesController < ApplicationController
 
   def destroy
     BlogEntry.find(params[:id]).destroy
-    redirect_to action: :list
+    redirect_to action: :index
   end
 
   private

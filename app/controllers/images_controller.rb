@@ -1,10 +1,5 @@
 class ImagesController < ApplicationController
   def index
-    list
-    render action: :list
-  end
-
-  def list
     @images = Image.paginate(per_page: 10, page: params[:page])
   end
 
@@ -64,7 +59,7 @@ class ImagesController < ApplicationController
 
   def destroy
     Image.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to :action => :index
   end
 
   private

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  post 'user/change_password' => 'user#change_password'
+  post 'users/change_password' => 'users#change_password'
+  post 'users/login' => 'users#login'
 
   root 'blogs#index'
 

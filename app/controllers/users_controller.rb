@@ -1,4 +1,6 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
+  skip_before_action :login_required, only: [:forgot_password, :login, :signup]
+
   def login
     return if generate_blank
     @user = User.new(user_params)

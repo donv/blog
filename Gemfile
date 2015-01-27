@@ -5,7 +5,7 @@ gem 'rails', '~>4.2.0'
 platform :jruby do
   gem 'activerecord-jdbcpostgresql-adapter', groups: [:development, :test]
   gem 'activerecord-jdbcmysql-adapter', group: :production
-  gem 'rmagick4j'
+  gem 'rmagick4j', require: 'RMagick'
   gem 'therubyrhino'
 end
 
@@ -41,5 +41,6 @@ end
 
 group :test do
   gem 'minitest-reporters'
+  gem 'simplecov'
   gem 'timecop'
 end

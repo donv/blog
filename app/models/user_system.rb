@@ -1,6 +1,8 @@
+require_relative 'user_environment'
+
 module UserSystem
   protected
-  
+
   # overwrite this if you want to restrict access to only a few actions
   # or if you want to check if the user has the correct rights  
   # example:
@@ -10,9 +12,9 @@ module UserSystem
   #    user.login != "bob"
   #  end
   def authorize?(user)
-     true
+    true
   end
-  
+
   # overwrite this method if you only want to protect certain actions of the controller
   # example:
   # 
@@ -27,7 +29,7 @@ module UserSystem
   def protect?(action)
     true
   end
-   
+
   # login_required filter. add 
   #
   #   before_filter :login_required
@@ -49,7 +51,7 @@ module UserSystem
     # store current location so that we can 
     # come back after the user logged in
     store_location
-  
+
     # call overwriteable reaction to unauthorized access
     access_denied
     false
@@ -61,9 +63,9 @@ module UserSystem
   # example use :
   # a popup window might just close itself for instance
   def access_denied
-    redirect_to controller: :user, action: :login
-  end  
-  
+    redirect_to controller: :users, action: :login
+  end
+
   # store current uri in  the session.
   # we can return to this location by calling return_location
   def store_location

@@ -1,15 +1,15 @@
 class BlogsController < ApplicationController
   def index
-    show
-    render action: 'show'
+    if (@blog = Blog.first)
+      show
+      render action: 'show'
+    else
+      redirect_to action: :new
+    end
   end
 
   def show
-    if params[:id]
-      @blog = Blog.find(params[:id])
-    else
-      @blog = Blog.first
-    end
+    @blog ||= Blog.find(params[:id])
     @blog_entries = BlogEntry.select(:datetime, :id, :text, :title).
         where('blog_id = ?', @blog.id).order('datetime DESC').
         paginate(per_page: 10, page: params[:page])
@@ -23,7 +23,7 @@ class BlogsController < ApplicationController
     @blog = Blog.new(blog_params)
     if @blog.save
       flash[:notice] = 'Blog was successfully created.'
-      redirect_to action: :list
+      redirect_to action: :index
     else
       render action: 'new'
     end
@@ -45,7 +45,7 @@ class BlogsController < ApplicationController
 
   def destroy
     Blog.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to :action => :index
   end
 
   private

@@ -8,15 +8,7 @@ class BlogEntriesControllerTest < ActionController::TestCase
   def test_index
     get :index
     assert_response :success
-    assert_template 'list'
-  end
-
-  def test_list
-    get :list
-
-    assert_response :success
-    assert_template 'list'
-
+    assert_template 'index'
     assert_not_nil assigns(:blog_entries)
   end
 
@@ -72,7 +64,7 @@ class BlogEntriesControllerTest < ActionController::TestCase
 
     post :destroy, id: blog_entries(:first).id
     assert_response :redirect
-    assert_redirected_to action: :list
+    assert_redirected_to action: :index
 
     assert_raise(ActiveRecord::RecordNotFound) {
       BlogEntry.find(1)

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UserControllerTest < ActionController::TestCase
+class UsersControllerTest < ActionController::TestCase
   self.use_transactional_fixtures = false
 
   def setup
