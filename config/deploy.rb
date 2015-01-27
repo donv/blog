@@ -16,10 +16,10 @@ set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/ca
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
-# after 'deploy:updated', :announce_maintenance
-# after 'deploy:finishing', :end_maintenance
+after 'deploy:updated', :announce_maintenance
 before 'deploy:restart', 'deploy:startup_script'
-after 'deploy:publishing', 'deploy:restart'
+after 'deploy:published', 'deploy:restart'
+after 'deploy:finished', :end_maintenance
 
 namespace :deploy do
   task :startup_script do
@@ -27,6 +27,30 @@ namespace :deploy do
       execute :sudo, "cp /u/apps/#{fetch :application}/current/usr/lib/systemd/system/#{fetch :application}.service /usr/lib/systemd/system/#{fetch :application}.service"
       execute :sudo, "systemctl enable #{fetch :application}"
       execute :sudo, 'systemctl daemon-reload'
+    end
+  end
+end
+
+desc 'Announce maintenance'
+task :announce_maintenance do
+  on roles :all do
+    within "#{fetch :current_path}/public" do
+      with rails_env: fetch(:rails_env) do
+        puts 'execute 1'
+        execute :cp, '503_update.html 503.html'
+      end
+    end
+  end
+end
+
+desc 'End maintenance'
+task :end_maintenance do
+  on roles :all do
+    within "#{fetch :current_path}/public" do
+      with rails_env: fetch(:rails_env) do
+        puts 'execute 2'
+        execute :cp, '503_down.html 503.html'
+      end
     end
   end
 end
