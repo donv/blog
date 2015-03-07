@@ -1,4 +1,4 @@
-lock '3.3.5'
+lock '3.4.0'
 
 set :application, 'blog'
 set :repo_url, "svn+ssh://capistrano@kubosch.no/var/svn/trunk/#{fetch :application}"

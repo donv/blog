@@ -1,6 +1,7 @@
 first:
   blog_entry: first
-  picture_data: 1,2,3,4
+  picture_data: !!binary "\
+    iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAAAACklEQVQYV2P4DwABAQEAWk1v8QAAAABJRU5ErkJggg=="
   picture_content_type: image/png
 another:
   blog_entry: first

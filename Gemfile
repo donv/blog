@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~>4.2.0'
+gem 'rails', '~>4.1.9'
 
 platform :jruby do
   gem 'activerecord-jdbcpostgresql-adapter', groups: [:development, :test]
@@ -36,7 +36,6 @@ group :development, :test do
   gem 'binding_of_caller', '0.7.3.pre1'
   gem 'byebug', platform: :ruby
   gem 'web-console', '~> 2.0'
-  gem 'spring'
 end
 
 group :test do

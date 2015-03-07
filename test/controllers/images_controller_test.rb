@@ -19,6 +19,13 @@ class ImagesControllerTest < ActionController::TestCase
     assert_template nil
   end
 
+  def test_thumbnail
+    get :thumbnail, id: images(:first).id
+
+    assert_response :success
+    assert_template nil
+  end
+
   def test_new
     get :new, blog_entry_id: blog_entries(:first)
 
