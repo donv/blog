@@ -10,6 +10,7 @@ platform :jruby do
 end
 
 platform :ruby do
+  gem 'mysql2'
   gem 'pg'
   gem 'rmagick'
   gem 'therubyracer'
