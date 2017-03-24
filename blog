@@ -18,7 +18,7 @@ START_CMD="
   cd $APP_DIR ;
   export JRUBY_OPTS='-J-Xmx2G --server -J-Djava.awt.headless=true -J-Dawt.toolkit=sun.awt.HToolkit' ;
   ruby -v ;
-  ruby -S bundle exec puma -d -t 0:20 -p $PORT -e $RAILS_ENV --pidfile $PIDFILE >$LOG_DIR/stdout.log 2>&1 ;
+  ruby -S bundle exec puma -d -t 4:10 -p $PORT -e $RAILS_ENV --pidfile $PIDFILE >$LOG_DIR/stdout.log 2>&1 ;
 "
 STOP_CMD="kill `cat $PIDFILE`"
 
