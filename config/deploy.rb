@@ -1,10 +1,10 @@
-lock '3.4.0'
+lock '~>3.4'
 
 set :application, 'blog'
 set :repo_url, "svn+ssh://capistrano@kubosch.no/var/svn/trunk/#{fetch :application}"
 set :deploy_to, "/u/apps/#{fetch :application}"
-set :scm, :svn
 set :pty, true
+set :rvm_ruby_version, File.read(File.expand_path('../.ruby-version', __dir__)).strip
 
 set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
