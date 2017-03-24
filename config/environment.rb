@@ -10,9 +10,3 @@ class Magick::Image
     resize(scale)
   end
 end
-
-class Mail::Message
-  def deliver_now
-    deliver
-  end
-end

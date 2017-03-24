@@ -11,6 +11,7 @@ en:
   listing: Listing
   new: New
   user_profile: Profile
+  users_login_button: Login
   save: Save
 
   active_record_errors_inclusion: Inclusion error
