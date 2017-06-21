@@ -3,14 +3,12 @@ source 'https://rubygems.org'
 gem 'rails', '~>4.2.8'
 
 platform :jruby do
-  gem 'activerecord-jdbcpostgresql-adapter', groups: [:development, :test]
-  gem 'activerecord-jdbcmysql-adapter', group: :production
+  gem 'activerecord-jdbcpostgresql-adapter'
   gem 'rmagick4j', require: 'RMagick'
   gem 'therubyrhino'
 end
 
 platform :ruby do
-  gem 'mysql2'
   gem 'pg'
   gem 'rmagick'
   gem 'therubyracer'
