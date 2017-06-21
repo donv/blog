@@ -22,7 +22,6 @@ gem 'jquery-rails'
 gem 'puma'
 gem 'RedCloth'
 gem 'sass-rails', '~> 5.0'
-gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'will_paginate'
 

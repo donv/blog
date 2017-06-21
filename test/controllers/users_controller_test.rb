@@ -280,7 +280,7 @@ class UsersControllerTest < ActionController::TestCase
   def test_invalid_login
     post :login, "user" => {"login" => "bob", "password" => "not_correct"}
 
-    assert_equal nil, session[:user]
+    assert_nil session[:user]
 
     assert_template "login"
   end
