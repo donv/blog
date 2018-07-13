@@ -7,7 +7,7 @@ User=capistrano
 Group=capistrano
 WorkingDirectory=/u/apps/blog/current
 ExecStart=/u/apps/blog/current/blog start
-PIDFile=/u/apps/blog/shared/tmp/pids/server.pid
+PIDFile=/u/apps/blog/shared/pids/server.pid
 
 # Timeout for start up/shut down
 TimeoutSec=300

@@ -9,13 +9,13 @@ platform :jruby do
 end
 
 platform :ruby do
-  gem 'pg'
-  gem 'rmagick'
+  gem 'pg', '<1'
+  gem 'mini_magick'
   gem 'therubyracer'
 end
 
 # gem 'bcrypt', '~> 3.1.7'
-gem 'coffee-rails', '~> 4.1.0'
+# gem 'coffee-rails', '~> 4.1.0'
 gem 'dynamic_form'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
@@ -26,8 +26,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'will_paginate'
 
 group :development do
-  gem 'capistrano-rails'
-  gem 'capistrano-rvm'
   gem 'web-console'
 end
 

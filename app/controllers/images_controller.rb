@@ -16,12 +16,10 @@ class ImagesController < ApplicationController
   def thumbnail
     image = Image.find(params[:id])
     image_data = image.picture_data
-    original_image = Magick::Image.from_blob(image_data)[0]
-    scale = 160.0 / original_image.columns
-    thumbnail_image = original_image.thumbnail(scale)
+    original_image = MiniMagick::Image.read(image_data)
+    thumbnail_image = original_image.resize('160')
     headers['Expires'] = 1.year.from_now.httpdate
     send_data(thumbnail_image.to_blob,
-#              :filename     => image.title,
         filename: "Blog Image #{image.id}",
         type: image.picture_content_type,
         disposition: 'inline')
