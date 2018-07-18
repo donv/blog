@@ -11,7 +11,7 @@ end
 platform :ruby do
   gem 'pg', '<1'
   gem 'mini_magick'
-  gem 'therubyracer'
+  gem 'mini_racer'
 end
 
 # gem 'bcrypt', '~> 3.1.7'
