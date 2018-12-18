@@ -2,7 +2,7 @@ Rails.application.configure do
   # config.action_controller.asset_host = 'http://assets.example.com'
   config.action_controller.perform_caching = true
   # config.action_dispatch.rack_cache = true
-  config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
+  # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
   # config.action_mailer.raise_delivery_errors = false
   config.active_record.dump_schema_after_migration = false
   config.active_support.deprecation = :notify
