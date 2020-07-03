@@ -13,25 +13,21 @@ class ActiveSupport::TestCase
   def login
     session[:user] = users(:bob)
   end
-
-  def assert_no_errors(assigns_sym)
-    assert_not_nil assigns(assigns_sym)
-    assert_equal [], assigns(assigns_sym).errors.to_a
-  end
-
 end
 
-class Mail::TestMailer
-  cattr_accessor :inject_one_error
-  self.inject_one_error = false
+module MailDeliveryError
+  def self.prepended(clas)
+    clas.cattr_accessor :inject_one_error
+    clas.inject_one_error = false
+  end
 
-  # FIXME(uwe):  Use deliver_now instead?
-  def deliver_with_error!(mail)
+  def deliver!(mail)
     if inject_one_error
       self.class.inject_one_error = false
       raise 'Failed to send email' if ActionMailer::Base.raise_delivery_errors
     end
-    deliver_without_error! mail
+    super mail
   end
-  alias_method_chain :deliver!, :error
 end
+require 'mail'
+Mail::TestMailer.prepend MailDeliveryError
