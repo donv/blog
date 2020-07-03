@@ -31,7 +31,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'binding_of_caller', '0.7.3.pre1'
   gem 'byebug', platform: :ruby
 end
 
