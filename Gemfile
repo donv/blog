@@ -9,7 +9,7 @@ platform :jruby do
 end
 
 platform :ruby do
-  gem 'pg', '<1'
+  gem 'pg'
   gem 'mini_magick'
   gem 'mini_racer'
 end
@@ -18,12 +18,12 @@ end
 gem 'bootsnap'
 # gem 'coffee-rails', '~> 4.1.0'
 gem 'dynamic_form'
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 gem 'jquery-rails'
 gem 'puma'
 gem 'RedCloth'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
+gem 'sassc-rails'
+gem 'uglifier'
 gem 'will_paginate'
 
 group :development do
