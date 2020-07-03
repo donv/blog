@@ -9,13 +9,15 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   # config.action_mailer.raise_delivery_errors = false
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "blog_app_#{Rails.env}"
+  # config.active_job.queue_name_prefix = "blog_app_production"
+  # config.active_record.database_selector = { delay: 2.seconds }
+  # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
+  # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
   config.active_record.dump_schema_after_migration = false
   config.active_storage.service = :local
   config.active_support.deprecation = :notify
   config.assets.compile = false
   # config.assets.css_compressor = :sass
-  config.assets.js_compressor = :uglifier
   config.cache_classes = true
   # config.cache_store = :mem_cache_store
   config.consider_all_requests_local = false

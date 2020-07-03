@@ -31,7 +31,7 @@ class BlogEntriesController < ApplicationController
 
   def update
     @blog_entry = BlogEntry.find(params[:id])
-    if @blog_entry.update_attributes(blog_entry_params)
+    if @blog_entry.update(blog_entry_params)
       flash[:notice] = 'BlogEntry was successfully updated.'
       redirect_to action: :show, id: @blog_entry
     else

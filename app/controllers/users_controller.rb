@@ -48,7 +48,7 @@ class UsersController < ApplicationController
         @user.change_password(params[:user][:password], params[:user][:password_confirmation])
         if @user.save
           UserNotify.change_password(@user, params[:user][:password]).deliver_now
-          flash.now[:notice] = t(:user_updated_password, "#{@user.email}")
+          flash.now[:notice] = t(:user_updated_password, s: "#{@user.email}")
         end
       end
     rescue
@@ -71,14 +71,14 @@ class UsersController < ApplicationController
     if params[:user][:email].empty?
       flash.now[:message] = t(:user_enter_valid_email_address)
     elsif (user = User.find_by_email(params[:user][:email])).nil?
-      flash.now[:message] = t(:user_email_address_not_found, "#{params[:user][:email]}")
+      flash.now[:message] = t(:user_email_address_not_found, s: "#{params[:user][:email]}")
     else
       begin
         User.transaction do
           key = user.generate_security_token
           url = url_for(action: :change_password, user: {id: user.id}, key: key)
           UserNotify.forgot_password(user, url).deliver_now
-          flash[:notice] = t(:user_forgotten_password_emailed, "#{params[:user][:email]}")
+          flash[:notice] = t(:user_forgotten_password_emailed, s: "#{params[:user][:email]}")
           unless user?
             redirect_to login_users_path
             return
@@ -86,7 +86,7 @@ class UsersController < ApplicationController
           redirect_back_or_default action: :welcome
         end
       rescue
-        flash.now[:message] = t(:user_forgotten_password_email_error, "#{params['user']['email']}")
+        flash.now[:message] = t(:user_forgotten_password_email_error, s: "#{params['user']['email']}")
       end
     end
   end
@@ -126,7 +126,7 @@ class UsersController < ApplicationController
       end
       logout
     rescue
-      flash.now[:message] = t(:user_delete_email_error, @user.email)
+      flash.now[:message] = t(:user_delete_email_error)
       redirect_back_or_default action: :welcome
     end
   end
@@ -149,7 +149,7 @@ class UsersController < ApplicationController
 
   def destroy(user)
     user.destroy
-    flash[:notice] = t(:user_delete_finished, "#{user.email}")
+    flash[:notice] = t(:user_delete_finished, s: "#{user.email}")
     UserNotify.delete(user).deliver_now
   end
 
