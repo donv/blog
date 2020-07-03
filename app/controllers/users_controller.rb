@@ -80,7 +80,7 @@ class UsersController < ApplicationController
           UserNotify.forgot_password(user, url).deliver_now
           flash[:notice] = t(:user_forgotten_password_emailed, "#{params[:user][:email]}")
           unless user?
-            redirect_to controller: :user, action: :login
+            redirect_to login_users_path
             return
           end
           redirect_back_or_default action: :welcome

@@ -32,11 +32,11 @@
   <div id="leftcol">
     <div id="navbar">
       <% if session['user'] %>
-          <%= link_to t(:user_welcome_logout_link), controller: :user, action: :logout %>
-          <%= link_to t(:user_profile), controller: :user, action: :edit, id: session['user'] %>
+          <%= link_to t(:user_welcome_logout_link), logout_users_path %>
+          <%= link_to t(:user_profile), edit_user_path(session['user']) %>
           | <a href="#" title="Administration">Administration</a>
       <% else %>
-          <%= link_to t(:user_logout_login_link), controller: :user, action: :login %>
+          <%= link_to t(:user_logout_login_link), login_users_path %>
       <% end %>
     </div>
     <div id="header">

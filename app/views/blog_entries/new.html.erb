@@ -3,5 +3,5 @@
 <%= form_tag action: :create do %>
     <%= render 'form' %>
     <%= submit_tag "Create" %> |
-    <%= link_to 'Back', controller: :blogs, action: :show, id: @blog %>
+    <%= link_to 'Back', blogs_path %>
 <% end %>

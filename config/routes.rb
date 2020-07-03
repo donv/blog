@@ -1,13 +1,26 @@
 Rails.application.routes.draw do
-  post 'users/change_password' => 'users#change_password'
-  post 'users/login' => 'users#login'
-
   root 'blogs#index'
 
   resources :blogs
   resources :blog_entries
-  resources :images
-  resources :users, path: 'user'
-
-  get ':controller(/:action(/:id))'
+  resources :images do
+    member do
+      get :thumbnail
+    end
+  end
+  resources :users, path: 'user' do
+    collection do
+      get :forgot_password
+      get :logout
+      get :restore_deleted
+      get :welcome
+      post :change_password
+      post :edit
+      post :login
+      post :signup
+    end
+    member do
+      post :change_password
+    end
+  end
 end
