@@ -1,41 +1,17 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'rails', '~>6.0.0'
+# Declare your gem's dependencies in blog.gemspec.
+# Bundler will treat runtime dependencies like base dependencies, and
+# development dependencies will be added by default to the :development group.
+gemspec
 
-platform :jruby do
-  gem 'activerecord-jdbcpostgresql-adapter'
-  gem 'rmagick4j', require: 'RMagick'
-  gem 'therubyrhino'
-end
+# Declare any dependencies that are still in development here instead of in
+# your gemspec. These might include edge Rails or gems from your path or
+# Git. Remember to move these dependencies to your gemspec before releasing
+# your gem to rubygems.org.
 
-platform :ruby do
-  gem 'pg'
-  gem 'mini_magick'
-  gem 'mini_racer'
-end
-
-# gem 'bcrypt', '~> 3.1.7'
-gem 'bootsnap'
-# gem 'coffee-rails', '~> 4.1.0'
-gem 'dynamic_form'
-gem 'jbuilder'
-gem 'jquery-rails'
-gem 'puma'
-gem 'RedCloth'
-gem 'sassc-rails'
-gem 'uglifier'
-gem 'will_paginate'
-
-group :development do
-  gem 'web-console'
-end
-
-group :development, :test do
-  gem 'byebug', platform: :ruby
-end
-
-group :test do
-  gem 'minitest-reporters'
-  gem 'simplecov'
-  gem 'timecop'
-end
+# To use a debugger
+# gem 'byebug', group: [:development, :test]

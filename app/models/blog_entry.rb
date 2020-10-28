@@ -1,7 +1,10 @@
-class BlogEntry < ActiveRecord::Base
-  belongs_to :blog
-  has_many :images
+# frozen_string_literal: true
 
-  validates_presence_of :blog_id, :title, :text
-  validates_presence_of :blog, if: :blog_id
+class BlogEntry < ApplicationRecord
+  self.table_name = :blog_entries
+  belongs_to :blog
+  has_many :images, dependent: :restrict_with_error
+
+  validates :blog_id, :title, :text, presence: true
+  validates :blog, presence: { if: :blog_id }
 end

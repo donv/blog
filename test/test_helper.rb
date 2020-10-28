@@ -1,17 +1,40 @@
-require 'simplecov'
-SimpleCov.start :rails
+# frozen_string_literal: true
 
-ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+# Configure Rails Environment
+ENV['RAILS_ENV'] = 'test'
+
+require_relative '../test/dummy/config/environment'
+ActiveRecord::Migrator.migrations_paths = [File.expand_path('../test/dummy/db/migrate', __dir__)]
+ActiveRecord::Migrator.migrations_paths << File.expand_path('../db/migrate', __dir__)
 require 'rails/test_help'
 
-MiniTest::Reporters.use!
+# Filter out the backtrace from minitest while preserving the one from other libraries.
+Minitest.backtrace_filter = Minitest::BacktraceFilter.new
 
-class ActiveSupport::TestCase
-  fixtures :all
+# Load fixtures from the engine
+if ActiveSupport::TestCase.respond_to?(:fixture_path=)
+  ActiveSupport::TestCase.fixture_path = File.expand_path('fixtures', __dir__)
+  ActionDispatch::IntegrationTest.fixture_path = ActiveSupport::TestCase.fixture_path
+  ActiveSupport::TestCase.file_fixture_path = "#{ActiveSupport::TestCase.fixture_path}/files"
+  ActiveSupport::TestCase.fixtures :all
+end
 
-  def login
-    session[:user] = users(:bob)
+# require 'simplecov'
+# SimpleCov.start :rails
+#
+# ENV['RAILS_ENV'] ||= 'test'
+# require File.expand_path('../../config/environment', __FILE__)
+# require 'rails/test_help'
+#
+# MiniTest::Reporters.use!
+#
+module ActiveSupport
+  class TestCase
+    #   fixtures :all
+    #
+    def login
+      session[:user] = users(:bob)
+    end
   end
 end
 

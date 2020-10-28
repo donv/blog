@@ -1,4 +1,6 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
+
+BlogEngine::Engine.routes.draw do
   root 'blogs#index'
 
   resources :blogs

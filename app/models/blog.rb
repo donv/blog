@@ -1,5 +1,9 @@
-class Blog < ActiveRecord::Base
-  has_many :blog_entries
+# frozen_string_literal: true
 
-  validates_presence_of :title
+class Blog < ApplicationRecord
+  self.table_name = :blogs
+
+  has_many :blog_entries, dependent: :restrict_with_error
+
+  validates :title, presence: true
 end

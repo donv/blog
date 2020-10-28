@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.raise_delivery_errors = false
@@ -12,7 +14,7 @@ Rails.application.configure do
   config.consider_all_requests_local = true
   config.eager_load = false
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
     config.cache_store = :memory_store
