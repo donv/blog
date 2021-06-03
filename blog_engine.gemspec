@@ -33,7 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'jbuilder'
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'mini_magick'
-  # spec.add_dependency 'mini_racer'
   spec.add_dependency 'pg'
   spec.add_dependency 'puma'
   spec.add_dependency 'rails', '~> 6.0'
