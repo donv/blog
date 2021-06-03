@@ -29,7 +29,6 @@ Gem::Specification.new do |spec|
   spec.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
   spec.add_dependency 'bootsnap'
-  spec.add_dependency 'dynamic_form'
   spec.add_dependency 'jbuilder'
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'mini_magick'
