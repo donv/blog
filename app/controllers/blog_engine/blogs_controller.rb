@@ -14,7 +14,7 @@ module BlogEngine
     def show
       @blog ||= Blog.find(params[:id])
       @blog_entries = BlogEntry.select(:datetime, :id, :text, :title)
-                               .where('blog_id = ?', @blog.id).order('datetime DESC')
+                               .where(blog_id: @blog.id).order('datetime DESC')
                                .paginate(per_page: 10, page: params[:page])
     end
 

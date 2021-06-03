@@ -141,11 +141,11 @@ module BlogEngine
     def restore_deleted
       @user = session['user']
       @user.deleted = 0
-      if !@user.save
+      if @user.save
+        redirect_to action: 'welcome'
+      else
         flash.now['notice'] = t(:user_restore_deleted_error, (@user['login']).to_s)
         redirect_to action: 'login'
-      else
-        redirect_to action: 'welcome'
       end
     end
 
@@ -160,11 +160,7 @@ module BlogEngine
     end
 
     def protect?(action)
-      if %w[login signup forgot_password].include?(action)
-        false
-      else
-        true
-      end
+      %w[login signup forgot_password].exclude?(action)
     end
 
     # Generate a template user for certain actions on get
