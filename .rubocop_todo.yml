@@ -136,7 +136,6 @@ Style/SuperWithArgsParentheses:
 Style/SymbolArray:
   Exclude:
     - 'app/controllers/blog_engine/blog_entries_controller.rb'
-    - 'app/controllers/blog_engine/users_controller.rb'
     - 'test/dummy/config/initializers/filter_parameter_logging.rb'
 
 # This cop supports safe autocorrection (--autocorrect).

@@ -16,6 +16,7 @@ module BlogEngine
     def test_show
       get blog_engine.blog_entry_path(blog_entries(:first))
       assert_response :success
+      assert_select 'a[href=?]', blog_engine.edit_blog_entry_path(blog_entries(:first)), 'Edit'
     end
 
     def test_show_links_thumbnails_to_the_full_size_images
