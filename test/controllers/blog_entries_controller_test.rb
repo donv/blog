@@ -18,6 +18,13 @@ module BlogEngine
       assert_response :success
     end
 
+    def test_show_links_full_size_images_outside_turbolinks
+      get blog_engine.blog_entry_path(blog_entries(:first))
+      assert_response :success
+      # Turbolinks would otherwise fetch the JPEG and render its bytes as page text.
+      assert_select 'a[data-turbolinks=false] img', count: blog_entries(:first).images.count
+    end
+
     def test_new
       get blog_engine.new_blog_entry_path
       assert_response :success
