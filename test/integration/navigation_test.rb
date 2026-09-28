@@ -3,7 +3,9 @@
 require 'test_helper'
 
 class NavigationTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  def test_protected_page_sends_a_visitor_to_the_login_page_and_remembers_where_they_were
+    get blog_engine.new_blog_path
+    assert_redirected_to '/account/login'
+    assert_equal blog_engine.new_blog_path, request.session[:return_to]
+  end
 end

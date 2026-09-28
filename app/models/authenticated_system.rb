@@ -17,7 +17,7 @@ module AuthenticatedSystem
 
   # Accesses the current user from the session.
   def current_user
-    @current_user ||= (session[:user] && User.find_by(id: session[:user]))
+    @current_user ||= session[:user] && User.find_by(id: session[:user])
   end
 
   # Store the given user in the session.
@@ -71,16 +71,12 @@ module AuthenticatedSystem
   # to access the requested action.  For example, a popup window might
   # simply close itself.
   def access_denied
-    respond_to do |accepts|
-      accepts.html do
+    respond_to do |format|
+      format.html do
         store_location
-        redirect_to controller: '/account', action: 'login'
+        redirect_to main_app.account_login_path
       end
-      accepts.xml do
-        headers['Status']           = 'Unauthorized'
-        headers['WWW-Authenticate'] = %(Basic realm="Web Password")
-        render text: "Could't authenticate you", status: :unauthorized
-      end
+      format.any { request_http_basic_authentication('Web Password') }
     end
   end
 
@@ -88,14 +84,13 @@ module AuthenticatedSystem
   #
   # We can return to this location by calling #redirect_back_or_default.
   def store_location
-    session[:return_to] = request.request_uri
+    session[:return_to] = request.fullpath
   end
 
   # Redirect to the URI stored by the most recent store_location call or
   # to the passed default.
   def redirect_back_or_default(default)
-    session[:return_to] ? redirect_to_url(session[:return_to]) : redirect_to(default)
-    session[:return_to] = nil
+    redirect_to(session.delete(:return_to) || default)
   end
 
   # When called with before_filter :login_from_cookie will check for an :auth_token
