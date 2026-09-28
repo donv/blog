@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 5) do
     t.string   'security_token',  limit: 40
     t.datetime 'token_expiry'
     t.integer  'deleted', default: 0
+    t.string   'remember_token'
+    t.datetime 'remember_token_expires_at'
     t.datetime 'delete_after'
   end
 end

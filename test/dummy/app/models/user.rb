@@ -9,4 +9,14 @@ class User < ApplicationRecord
   def login
     email
   end
+
+  def remember_token?
+    remember_token_expires_at && Time.now.utc < remember_token_expires_at
+  end
+
+  def remember_me
+    self.remember_token_expires_at = 2.weeks.from_now.utc
+    self.remember_token = Digest::SHA1.hexdigest("#{email}--#{remember_token_expires_at}")
+    save(validate: false)
+  end
 end

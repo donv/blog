@@ -5,6 +5,7 @@ module BlogEngine
     protect_from_forgery with: :exception
     include AuthenticatedSystem
 
+    before_action :login_from_cookie
     before_action :login_required
     before_action :populate_layout
 

@@ -6,3 +6,9 @@ plugins:
 
 AllCops:
   NewCops: enable
+
+# The gemspec and the dummy schema are single long blocks by nature.
+Metrics/BlockLength:
+  Exclude:
+    - blog_engine.gemspec
+    - test/dummy/db/schema.rb
