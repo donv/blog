@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mini_magick'
   spec.add_dependency 'pg'
   spec.add_dependency 'puma'
-  spec.add_dependency 'rails', '~> 7.0'
+  spec.add_dependency 'rails', '~> 8.0'
   spec.add_dependency 'RedCloth'
   spec.add_dependency 'sassc-rails'
   spec.add_dependency 'will_paginate'
