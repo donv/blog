@@ -14,6 +14,7 @@ Rails.application.configure do
   config.consider_all_requests_local = true
   config.eager_load = false
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  config.i18n.raise_on_missing_translations = true
   if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true

@@ -22,6 +22,10 @@ module BlogEngine
       @blog = Blog.new
     end
 
+    def edit
+      @blog = Blog.find(params[:id])
+    end
+
     def create
       @blog = Blog.new(blog_params)
       if @blog.save
@@ -30,10 +34,6 @@ module BlogEngine
       else
         render action: 'new'
       end
-    end
-
-    def edit
-      @blog = Blog.find(params[:id])
     end
 
     def update

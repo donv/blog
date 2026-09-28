@@ -82,7 +82,7 @@ module BlogEngine
         begin
           User.transaction do
             key = user.generate_security_token
-            url = url_for(action: :change_password, user: { id: user.id }, key: key)
+            url = url_for(action: :change_password, user: { id: user.id }, key:)
             UserNotify.forgot_password(user, url).deliver_now
             flash[:notice] = t(:user_forgotten_password_emailed, s: (params[:user][:email]).to_s)
             unless user?

@@ -41,13 +41,13 @@ if Rails.env.development? || Rails.env.test?
 
   namespace :test do
     desc 'Run Rubocop and all tests'
-    task full: %i[rubocop:auto_correct test]
+    task full: %i[rubocop:autocorrect_all test]
   end
 end
 
 task 'db:schema:dump' => :environment do
   filename = 'db/schema.rb'
-  sh "rubocop --auto-correct-all #{filename} > /dev/null"
+  sh "rubocop --autocorrect-all #{filename} > /dev/null"
   schema = File.read(filename)
                .gsub(', id: :serial', '')
                .gsub(/, id: :integer, default: -> { "nextval\('instructions_id_seq'::regclass\)" }/, '')

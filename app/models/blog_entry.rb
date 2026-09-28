@@ -5,6 +5,6 @@ class BlogEntry < ApplicationRecord
   belongs_to :blog
   has_many :images, dependent: :restrict_with_error
 
-  validates :blog_id, :title, :text, presence: true
+  validates :title, :text, presence: true
   validates :blog, presence: { if: :blog_id }
 end

@@ -3,7 +3,7 @@
 require 'test_helper'
 
 module BlogEngine
-  class BlogsControllerTest < ActionController::TestCase
+  class BlogsControllerTest < ActionDispatch::IntegrationTest
     # def setup
     #   login
     # end

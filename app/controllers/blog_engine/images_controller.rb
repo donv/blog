@@ -36,6 +36,10 @@ module BlogEngine
       @blog = BlogEntry.find(params[:blog_entry_id]).blog
     end
 
+    def edit
+      @image = Image.find(params[:id])
+    end
+
     def create
       @image = Image.new(image_params)
       if @image.save
@@ -44,10 +48,6 @@ module BlogEngine
       else
         render action: :new
       end
-    end
-
-    def edit
-      @image = Image.find(params[:id])
     end
 
     def update

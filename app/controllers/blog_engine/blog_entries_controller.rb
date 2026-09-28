@@ -17,6 +17,11 @@ module BlogEngine
       @blog = @blog_entry.blog
     end
 
+    def edit
+      @blog_entry = BlogEntry.find(params[:id])
+      @blog = @blog_entry.blog
+    end
+
     def create
       @blog_entry = BlogEntry.new(blog_entry_params)
       if @blog_entry.save
@@ -25,11 +30,6 @@ module BlogEngine
       else
         render action: :new
       end
-    end
-
-    def edit
-      @blog_entry = BlogEntry.find(params[:id])
-      @blog = @blog_entry.blog
     end
 
     def update

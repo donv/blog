@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.summary     = 'A simple personal blog'
   spec.description = 'A simple personal blog'
   spec.license     = 'UNLICENSED'
-  spec.required_ruby_version = '~>3.0'
+  spec.required_ruby_version = '~>3.3'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
     spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
   else
     raise 'RubyGems 2.0 or newer is required to protect against ' \
-      'public gem pushes.'
+          'public gem pushes.'
   end
 
   spec.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mini_magick'
   spec.add_dependency 'pg'
   spec.add_dependency 'puma'
-  spec.add_dependency 'rails', '~> 6.0'
+  spec.add_dependency 'rails', '~> 7.0'
   spec.add_dependency 'RedCloth'
   spec.add_dependency 'sassc-rails'
   spec.add_dependency 'uglifier'
@@ -47,4 +47,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'sqlite3'
   spec.add_development_dependency 'timecop'
   spec.add_development_dependency 'web-console'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end
