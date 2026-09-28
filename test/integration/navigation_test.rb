@@ -12,7 +12,7 @@ class NavigationTest < ActionDispatch::IntegrationTest
   def test_remember_me_cookie_logs_the_visitor_in
     user = users(:bob)
     user.remember_me
-    cookies[:auth_token] = user.remember_token
+    cookies[:remember_token] = user.remember_token
     get blog_engine.new_blog_path
     assert_response :success
   end

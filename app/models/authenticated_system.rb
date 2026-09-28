@@ -93,20 +93,32 @@ module AuthenticatedSystem
     redirect_to(session.delete(:return_to) || default)
   end
 
-  # When called with before_filter :login_from_cookie will check for an :auth_token
+  # Name of the cookie holding the remember-me token. Like the session cookie, it is issued for the
+  # whole domain so that one login covers all subdomains.
+  REMEMBER_COOKIE = :remember_token
+
+  # When called with before_action :login_from_cookie will check for a remember-me
   # cookie and log the user back in if apropriate
   def login_from_cookie
-    return unless cookies[:auth_token] && !logged_in?
+    return unless cookies[REMEMBER_COOKIE] && !logged_in?
 
-    user = User.find_by(remember_token: cookies[:auth_token])
+    user = User.find_by(remember_token: cookies[REMEMBER_COOKIE])
     return unless user&.remember_token?
 
     user.remember_me
     self.current_user = user
-    cookies[:auth_token] = { value: current_user.remember_token,
-                             expires: current_user.remember_token_expires_at,
-                             httponly: true }
+    remember_current_user
     flash[:notice] = 'Logged in successfully'
+  end
+
+  def remember_current_user
+    cookies[REMEMBER_COOKIE] = { value: current_user.remember_token,
+                                 expires: current_user.remember_token_expires_at,
+                                 domain: :all, httponly: true }
+  end
+
+  def forget_current_user
+    cookies.delete REMEMBER_COOKIE, domain: :all
   end
 
   HTTP_AUTH_HEADERS = %w[X-HTTP_AUTHORIZATION HTTP_AUTHORIZATION Authorization].freeze
