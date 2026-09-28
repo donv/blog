@@ -4,6 +4,7 @@ module BlogEngine
   class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
     include AuthenticatedSystem
+
     # include UserSystem
 
     layout 'mwrt002'

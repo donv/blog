@@ -77,14 +77,14 @@ module BlogEngine
       if params[:user][:email].empty?
         flash.now[:message] = t(:user_enter_valid_email_address)
       elsif (user = User.find_by(email: params[:user][:email])).nil?
-        flash.now[:message] = t(:user_email_address_not_found, s: (params[:user][:email]).to_s)
+        flash.now[:message] = t(:user_email_address_not_found, s: params[:user][:email].to_s)
       else
         begin
           User.transaction do
             key = user.generate_security_token
             url = url_for(action: :change_password, user: { id: user.id }, key:)
             UserNotify.forgot_password(user, url).deliver_now
-            flash[:notice] = t(:user_forgotten_password_emailed, s: (params[:user][:email]).to_s)
+            flash[:notice] = t(:user_forgotten_password_emailed, s: params[:user][:email].to_s)
             unless user?
               redirect_to login_users_path
               return
@@ -92,7 +92,7 @@ module BlogEngine
             redirect_back_or_default action: :welcome
           end
         rescue StandardError
-          flash.now[:message] = t(:user_forgotten_password_email_error, s: (params['user']['email']).to_s)
+          flash.now[:message] = t(:user_forgotten_password_email_error, s: params['user']['email'].to_s)
         end
       end
     end
@@ -144,7 +144,7 @@ module BlogEngine
       if @user.save
         redirect_to action: 'welcome'
       else
-        flash.now['notice'] = t(:user_restore_deleted_error, (@user['login']).to_s)
+        flash.now['notice'] = t(:user_restore_deleted_error, @user['login'].to_s)
         redirect_to action: 'login'
       end
     end
@@ -165,30 +165,24 @@ module BlogEngine
 
     # Generate a template user for certain actions on get
     def generate_blank
-      case request.method
-      when 'GET'
-        @user = User.new
-        render
-        return true
-      end
-      false
+      return false unless request.get?
+
+      @user = User.new
+      render
     end
 
     # Generate a template user for certain actions on get
     def generate_filled_in
       @user = session['user']
-      case request.method
-      when :get
-        render
-        return true
-      end
-      false
+      return false unless request.get?
+
+      render
     end
 
     private
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation)
+      params.expect(user: [:email, :password, :password_confirmation])
     end
   end
 end

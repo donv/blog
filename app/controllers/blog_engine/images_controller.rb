@@ -11,7 +11,7 @@ module BlogEngine
     end
 
     def show
-      image = Image.find(params[:id])
+      image = Image.find(params.expect(:id))
       headers['Expires'] = 1.year.from_now.httpdate
       send_data(image.picture_data,
                 # :filename     => image.title,
@@ -21,7 +21,7 @@ module BlogEngine
     end
 
     def thumbnail
-      image = Image.find(params[:id])
+      image = Image.find(params.expect(:id))
       image_data = image.picture_data
       original_image = MiniMagick::Image.read(image_data)
       thumbnail_image = original_image.resize('160')
@@ -35,11 +35,11 @@ module BlogEngine
     def new
       @image = Image.new
       @image.blog_entry_id = params[:blog_entry_id]
-      @blog = BlogEntry.find(params[:blog_entry_id]).blog
+      @blog = BlogEntry.find(params.expect(:blog_entry_id)).blog
     end
 
     def edit
-      @image = Image.find(params[:id])
+      @image = Image.find(params.expect(:id))
     end
 
     def create
@@ -53,7 +53,7 @@ module BlogEngine
     end
 
     def update
-      @image = Image.find(params[:id])
+      @image = Image.find(params.expect(:id))
       if @image.update(image_params)
         flash[:notice] = 'Image was successfully updated.'
         redirect_to action: :show, id: @image
@@ -63,14 +63,14 @@ module BlogEngine
     end
 
     def destroy
-      Image.find(params[:id]).destroy
+      Image.find(params.expect(:id)).destroy
       redirect_to action: :index
     end
 
     private
 
     def image_params
-      params.require(:image).permit(:blog_entry_id)
+      params.expect(image: [:blog_entry_id])
     end
   end
 end

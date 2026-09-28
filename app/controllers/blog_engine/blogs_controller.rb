@@ -14,9 +14,9 @@ module BlogEngine
     end
 
     def show
-      @blog ||= Blog.find(params[:id])
+      @blog ||= Blog.find(params.expect(:id))
       @blog_entries = BlogEntry.select(:datetime, :id, :text, :title)
-                               .where(blog_id: @blog.id).order('datetime DESC')
+                               .where(blog_id: @blog.id).order(datetime: :desc)
                                .paginate(per_page: 10, page: params[:page])
     end
 
@@ -25,7 +25,7 @@ module BlogEngine
     end
 
     def edit
-      @blog = Blog.find(params[:id])
+      @blog = Blog.find(params.expect(:id))
     end
 
     def create
@@ -39,7 +39,7 @@ module BlogEngine
     end
 
     def update
-      @blog = Blog.find(params[:id])
+      @blog = Blog.find(params.expect(:id))
       if @blog.update(blog_params)
         flash[:notice] = 'Blog was successfully updated.'
         redirect_to action: 'show', id: @blog
@@ -49,14 +49,14 @@ module BlogEngine
     end
 
     def destroy
-      Blog.find(params[:id]).destroy
+      Blog.find(params.expect(:id)).destroy
       redirect_to action: :index
     end
 
     private
 
     def blog_params
-      params.require(:blog).permit(:title)
+      params.expect(blog: [:title])
     end
   end
 end

@@ -9,7 +9,7 @@ module BlogEngine
     end
 
     def show
-      @blog_entry = BlogEntry.find(params[:id])
+      @blog_entry = BlogEntry.find(params.expect(:id))
       @blog = @blog_entry.blog
     end
 
@@ -20,7 +20,7 @@ module BlogEngine
     end
 
     def edit
-      @blog_entry = BlogEntry.find(params[:id])
+      @blog_entry = BlogEntry.find(params.expect(:id))
       @blog = @blog_entry.blog
     end
 
@@ -35,7 +35,7 @@ module BlogEngine
     end
 
     def update
-      @blog_entry = BlogEntry.find(params[:id])
+      @blog_entry = BlogEntry.find(params.expect(:id))
       if @blog_entry.update(blog_entry_params)
         flash[:notice] = 'BlogEntry was successfully updated.'
         redirect_to action: :show, id: @blog_entry
@@ -45,14 +45,14 @@ module BlogEngine
     end
 
     def destroy
-      BlogEntry.find(params[:id]).destroy
+      BlogEntry.find(params.expect(:id)).destroy
       redirect_to action: :index
     end
 
     private
 
     def blog_entry_params
-      params.require(:blog_entry).permit(:blog_id, :datetime, :text, :title)
+      params.expect(blog_entry: [:blog_id, :datetime, :text, :title])
     end
   end
 end

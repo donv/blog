@@ -80,9 +80,8 @@ module UserSystem
   #   def authorize?(user)
   #
   def login_required
-    return true unless protect?(action_name)
-
-    return true if user? && authorize?(session[:user])
+    return unless protect?(action_name)
+    return if user? && authorize?(session[:user])
 
     # store current location so that we can
     # come back after the user logged in
