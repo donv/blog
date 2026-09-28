@@ -1,0 +1,8 @@
+<ul>
+<% @blogs.each do |blog| %>
+  <li><%= link_to blog.title, blog_path(blog) %></li>
+<% end %>
+</ul>
+<% if logged_in? %>
+  <%= link_to "#{t :new} #{t :blog}", new_blog_path %>
+<% end %>

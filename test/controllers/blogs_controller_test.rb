@@ -18,6 +18,13 @@ module BlogEngine
       assert_response :success
     end
 
+    def test_show_lists_all_blogs_in_the_sidebar
+      get blog_engine.blog_path(blogs(:first))
+      assert_select 'title', "#{I18n.t(:blog)} - #{blogs(:first).title}"
+      assert_select 'a[href=?]', blog_engine.blog_path(blogs(:another)), text: blogs(:another).title
+      assert_select 'a[href=?]', blog_engine.new_blog_path
+    end
+
     def test_new
       get blog_engine.new_blog_path
       assert_response :success

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Blog</title>
+  <title><%= [@application_title, @page_title, @page_subtitle].compact.join(' - ') %></title>
   <%= stylesheet_link_tag    'blog/application', media: 'all' %>
   <%= javascript_include_tag 'blog/application' %>
   <%= csrf_meta_tags %>
@@ -9,7 +9,17 @@
 </head>
 <body>
 
+<h1><%= @application_title %></h1>
+<h3><%= @page_title %></h3>
+
 <%= yield %>
+
+<% @sidebars.to_a.each do |sidebar| %>
+  <div class="rblock">
+    <h4><%= sidebar[:title] %></h4>
+    <%= sidebar[:content] %>
+  </div>
+<% end %>
 
 </body>
 </html>

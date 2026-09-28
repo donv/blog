@@ -5,16 +5,17 @@ module BlogEngine
     protect_from_forgery with: :exception
     include AuthenticatedSystem
 
-    # include UserSystem
-
-    layout 'mwrt002'
     before_action :login_required
-    before_action :load_blogs
+    before_action :populate_layout
 
     private
 
-    def load_blogs
+    # The host application renders the engine inside its own layout, which shows @application_title
+    # as the page heading and @sidebars in the right column.
+    def populate_layout
+      @application_title = t(:blog)
       @blogs = Blog.all
+      @sidebars = [{ title: t(:blogs), content: view_context.render(partial: 'blog_engine/shared/blogs_sidebar') }]
     end
   end
 end
