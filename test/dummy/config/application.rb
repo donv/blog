@@ -1,7 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
-require "sprockets/railtie"  # <--- make sure this line is here
+require "sprockets/railtie" # <--- make sure this line is here
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

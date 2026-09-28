@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails', '~> 7.0'
   spec.add_dependency 'RedCloth'
   spec.add_dependency 'sassc-rails'
-  spec.add_dependency 'uglifier'
+  spec.add_dependency 'will_paginate'
 
   spec.add_development_dependency 'byebug'
   spec.add_development_dependency 'listen'

@@ -7,7 +7,7 @@ module BlogEngine
     # include UserSystem
 
     layout 'mwrt002'
-    before_action :login_required, except: %i[index show thumbnail] # rubocop: disable Rails/LexicallyScopedActionFilter
+    before_action :login_required
     before_action :load_blogs
 
     private

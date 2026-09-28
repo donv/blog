@@ -1,0 +1,4 @@
+bob:
+  email: bob@example.com
+  salted_password: not-used-in-tests
+  salt: not-used-in-tests

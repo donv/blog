@@ -15,3 +15,6 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
+
+# Test against the Rails version the host app uses
+gem 'rails', '~> 7.1.0'

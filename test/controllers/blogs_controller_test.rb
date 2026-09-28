@@ -4,59 +4,54 @@ require 'test_helper'
 
 module BlogEngine
   class BlogsControllerTest < ActionDispatch::IntegrationTest
-    # def setup
-    #   login
-    # end
+    setup do
+      login
+    end
 
     def test_index
-      get :index
+      get blog_engine.blogs_path
       assert_response :success
     end
 
     def test_show
-      get :show, params: { id: blogs(:first) }
-
+      get blog_engine.blog_path(blogs(:first))
       assert_response :success
     end
 
     def test_new
-      get :new
-
+      get blog_engine.new_blog_path
       assert_response :success
     end
 
     def test_create
-      num_blogs = Blog.count
-
-      post :create, params: { blog: { title: 'new title' } }
-
-      assert_response :redirect
-      assert_redirected_to action: :index
-
-      assert_equal num_blogs + 1, Blog.count
+      assert_difference('Blog.count') do
+        post blog_engine.blogs_path, params: { blog: { title: 'new title' } }
+      end
+      assert_redirected_to blog_engine.root_path
     end
 
     def test_edit
-      get :edit, params: { id: blogs(:first).id }
-
+      get blog_engine.edit_blog_path(blogs(:first))
       assert_response :success
     end
 
     def test_update
-      post :update, params: { id: blogs(:first).id, blog: { title: 'new title' } }
-      assert_response :redirect
-      assert_redirected_to action: :show, id: blogs(:first).id
+      patch blog_engine.blog_path(blogs(:first)), params: { blog: { title: 'new title' } }
+      assert_redirected_to blog_engine.blog_path(blogs(:first))
+      assert_equal 'new title', blogs(:first).reload.title
     end
 
     def test_destroy
-      assert_not_nil blogs(:first)
+      # A blog with entries refuses to be destroyed, so use the empty one.
+      assert_difference('Blog.count', -1) do
+        delete blog_engine.blog_path(blogs(:another))
+      end
+      assert_redirected_to blog_engine.root_path
+    end
 
-      post :destroy, params: { id: blogs(:first).id }
-      assert_response :redirect
-      assert_redirected_to action: :index
-
-      assert_raise(ActiveRecord::RecordNotFound) do
-        Blog.find(blogs(:first).id)
+    def test_destroy_refuses_blog_with_entries
+      assert_no_difference('Blog.count') do
+        delete blog_engine.blog_path(blogs(:first))
       end
     end
   end

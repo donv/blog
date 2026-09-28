@@ -2,6 +2,8 @@
 
 module BlogEngine
   class BlogsController < ApplicationController
+    skip_before_action :login_required, only: %i[index show]
+
     def index
       if (@blog = Blog.first)
         show

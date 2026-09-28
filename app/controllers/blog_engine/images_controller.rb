@@ -4,6 +4,8 @@ require 'mini_magick'
 
 module BlogEngine
   class ImagesController < ApplicationController
+    skip_before_action :login_required, only: %i[index show thumbnail]
+
     def index
       @images = Image.all
     end

@@ -2,6 +2,8 @@
 
 module BlogEngine
   class BlogEntriesController < ApplicationController
+    skip_before_action :login_required, only: %i[index show]
+
     def index
       @blog_entries = BlogEntry.paginate(per_page: 10, page: params[:page])
     end
